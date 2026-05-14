@@ -15,6 +15,7 @@ numpy
 
 # HuggingFace
 transformers
+ipywidgets
 huggingface-hub
 
 # Visualisation
