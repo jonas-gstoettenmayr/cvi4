@@ -1,0 +1,26 @@
+# Requirements for fruits360 notebooks
+# Install with: uv pip install -r requirements.txt
+#
+# Note: CLIP is not on PyPI — install from source:
+#   uv pip install git+https://github.com/openai/CLIP.git
+# Then install the remaining packages below.
+
+# Deep learning
+torch
+torchvision          # required by CLIP at runtime
+
+# Vision & data
+Pillow
+numpy
+
+# HuggingFace
+transformers
+huggingface-hub
+
+# Visualisation
+matplotlib
+seaborn
+
+# ML utilities
+scikit-learn
+tqdm
