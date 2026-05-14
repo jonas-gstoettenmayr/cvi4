@@ -12,3 +12,9 @@
 `source .venv/bin/activate`
 `uv pip install git+https://github.com/openai/CLIP.git`
 `uv pip install -r requirements.txt`
+
+Open notebook and select kernel
+`>Python: Select Interpreter`
+`Enter interpreter path`
+`Find...`
+`/home/azureuser/cvi4ic-notebooks/11/.venv/bin/python`

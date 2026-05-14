@@ -34,20 +34,36 @@ def discover_classes(dataset_root: pathlib.Path) -> list[str]:
     return sorted(d.name for d in dataset_root.iterdir() if d.is_dir())
 
 
+def _normalize(s: str) -> str:
+    """Lowercase and collapse underscores, hyphens, and spaces to a single space."""
+    return " ".join(s.lower().replace("_", " ").replace("-", " ").split())
+
+
 def find_folder(prefix: str, all_classes: list[str],
                 dataset_root: pathlib.Path) -> str | None:
     """
     Resolve a folder name from a human-readable prefix.
 
-    Tries an exact match first; falls back to the first case-insensitive
-    prefix match among *all_classes*.
+    Matching is case-insensitive and treats underscores, hyphens, and spaces
+    as equivalent, so ``"apple_golden_1"`` matches ``"Apple Golden 1"``.
+
+    Resolution order:
+    1. Exact path exists on disk.
+    2. Normalised exact match against *all_classes*.
+    3. First normalised prefix match against *all_classes*.
 
     Returns the folder name, or ``None`` if nothing matches.
     """
     if (dataset_root / prefix).is_dir():
         return prefix
-    candidates = [c for c in all_classes if c.lower().startswith(prefix.lower())]
-    return candidates[0] if candidates else None
+    norm_prefix = _normalize(prefix)
+    for c in all_classes:
+        if _normalize(c) == norm_prefix:
+            return c
+    for c in all_classes:
+        if _normalize(c).startswith(norm_prefix):
+            return c
+    return None
 
 
 def load_class_images(folder: str, dataset_root: pathlib.Path,
@@ -78,6 +94,30 @@ def build_fruit_map(fruit_keywords: list[tuple[str, str]],
         else:
             print(f"[WARNING] no folder found for prefix '{prefix}'")
     return fruit_map
+
+
+def suggest_folders(prefix: str, all_classes: list[str], n: int = 5) -> None:
+    """
+    Print the *n* closest class folder names to *prefix* (by normalised prefix).
+
+    Call this when ``build_fruit_map`` warns that a prefix cannot be resolved,
+    to see what the dataset actually contains.
+
+    Example::
+
+        suggest_folders("apple", all_classes)
+        # Apple Golden 1
+        # Apple Braeburn 1
+        # ...
+    """
+    norm = _normalize(prefix)
+    ranked = sorted(all_classes, key=lambda c: (
+        0 if _normalize(c).startswith(norm) else
+        1 if norm in _normalize(c) else 2
+    ))
+    print(f"Closest matches for '{prefix}':")
+    for c in ranked[:n]:
+        print(f"  {c}")
 
 
 # ---------------------------------------------------------------------------
