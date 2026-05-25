@@ -34,3 +34,7 @@ seaborn
 scikit-learn
 tqdm
 git+https://github.com/openai/CLIP.git
+
+# Jupyter
+jupyterlab
+ipykernel
