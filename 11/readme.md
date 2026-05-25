@@ -18,3 +18,8 @@ Open notebook and select kernel
 `Enter interpreter path`
 `Find...`
 `/home/azureuser/cvi4ic-notebooks/11/.venv/bin/python`
+
+
+```
+pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+```
