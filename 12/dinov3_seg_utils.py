@@ -113,11 +113,11 @@ def build_gallery_prototype(ref_paths, model, processor, device, num_reg):
     flat    = stacked.reshape(-1, stacked.shape[-1]).astype(np.float32)
     pc1     = PCA(n_components=1, random_state=42).fit_transform(flat)[:, 0]
     pc1_2d  = pc1.reshape(len(ref_paths), N_PATCH)
-    fg_mask = # TODO
+    fg_mask = None # TODO
     fg_vecs = np.vstack([stacked[i][fg_mask[i]] for i in range(len(ref_paths))])
 
-    prototype = # TODO
-    prototype /= # TODO
+    prototype = None # TODO
+    prototype /= None # TODO
     print(f"Prototype from {len(fg_vecs)} foreground patches.")
     return prototype, len(fg_vecs)
 
@@ -134,10 +134,10 @@ def build_bbox_prototype(scene_tokens, query_box, orig_w, orig_h):
     assert 0 <= x1 < x2 <= orig_w and 0 <= y1 < y2 <= orig_h, \
         f"Box {query_box} is out of image bounds ({orig_w}×{orig_h})"
     sx, sy = IMG_SIZE / orig_w, IMG_SIZE / orig_h
-    pc_lo  = # TODO
-    pc_hi  = # TODO
-    pr_lo  = # TODO
-    pr_hi  = # TODO
+    pc_lo  = None # TODO
+    pc_hi  = None # TODO
+    pr_lo  = None # TODO
+    pr_hi  = None # TODO
     idx    = [r * N_SIDE + c for r in range(pr_lo, pr_hi) for c in range(pc_lo, pc_hi)]
     assert idx, "Box maps to zero patches — make the box larger."
 
@@ -159,8 +159,8 @@ def build_point_prototype(scene_tokens, query_point, orig_w, orig_h):
     assert 0 <= px < orig_w and 0 <= py < orig_h, \
         f"Point {query_point} is outside image bounds ({orig_w}×{orig_h})"
     sx, sy = IMG_SIZE / orig_w, IMG_SIZE / orig_h
-    q_col  = # TODO
-    q_row  = # TODO
+    q_col  = None # TODO
+    q_row  = None # TODO
     prototype = scene_tokens[q_row * N_SIDE + q_col].numpy()
     print(f"[point] ({px}, {py}) → patch row {q_row}, col {q_col}")
     return prototype, q_row, q_col
@@ -179,14 +179,14 @@ def compute_sim_mask(prototype, scene_tokens, sim_percentile, orig_w, orig_h):
     threshold     : float — the sim_percentile-th percentile value
     """
     proto_t       = torch.tensor(prototype, dtype=torch.float32).unsqueeze(0)
-    sims          = # TODO
+    sims          = None # TODO
     sim_grid      = sims.reshape(N_SIDE, N_SIDE)                    # (14, 14)
     sim_upsampled = np.array(
         Image.fromarray(sim_grid.astype(np.float32), mode="F")
              .resize((orig_w, orig_h), Image.BILINEAR)
     )
     threshold   = np.percentile(sim_upsampled, sim_percentile)
-    binary_mask = # TODO
+    binary_mask = None # TODO
     return sim_upsampled, binary_mask, threshold
 
 

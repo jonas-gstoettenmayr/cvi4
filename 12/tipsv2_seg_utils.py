@@ -145,7 +145,7 @@ def upsample(arr, h, w, mode="bilinear"):
         t = t.unsqueeze(-1)
     t  = t.permute(2, 0, 1).unsqueeze(0)
     kw = dict(align_corners=False) if mode == "bilinear" else {}
-    up = F.interpolate(t, size=(h, w), mode=mode, **kw)
+    up = None # TODO
     return up[0].permute(1, 2, 0).numpy()
 
 
@@ -263,8 +263,8 @@ def vis_kmeans(spatial, h, w, n_clusters=6):
     """
     sp_h, sp_w = spatial.shape[:2]
     feat   = l2_normalize(spatial.reshape(-1, spatial.shape[-1]).astype(np.float32))
-    labels = # TODO
-    labels_up = # TODO
+    labels = None # TODO
+    labels_up = None # TODO
     palette = (plt.cm.tab20(np.linspace(0, 1, max(n_clusters, 2)))
                [:n_clusters, :3] * 255).astype(np.uint8)
     return palette[labels_up]
@@ -291,9 +291,9 @@ def zeroseg(spatial, orig_arr, classes, class_embs):
     n          = len(classes)
 
     feat    = l2_normalize(spatial.reshape(-1, spatial.shape[-1]))
-    sim = # TODO
-    sim_up  = # TODO
-    labels  = # TODO
+    sim = None # TODO
+    sim_up  = None # TODO
+    labels  = None # TODO
 
     palette  = (plt.cm.tab20(np.linspace(0, 1, max(n, 2)))[:n, :3] * 255).astype(np.uint8)
     seg_rgb  = palette[labels].astype(np.float32) / 255.0

@@ -104,8 +104,8 @@ def segment_by_bbox(image_path, model, processor, box_xyxy, device):
     result: {"mask": np.bool_ (H, W), "score": float}
     """
     img = Image.open(image_path).convert("RGB")
-    inputs = # TODO
-    outputs = # TODO
+    inputs = None # TODO
+    outputs = None # TODO
     masks  = processor.post_process_masks(
         outputs.pred_masks.cpu(), inputs["original_sizes"]
     )[0]                                              # (num_obj, num_masks, H, W)
@@ -122,7 +122,7 @@ def segment_by_point(image_path, model, processor, point_xy, device, label=1):
     result: {"mask": np.bool_ (H, W), "score": float}
     """
     img = Image.open(image_path).convert("RGB")
-    inputs = # TODO
+    inputs = None # TODO
     outputs = model(**inputs, multimask_output=False)
     masks  = processor.post_process_masks(
         outputs.pred_masks.cpu(), inputs["original_sizes"]
