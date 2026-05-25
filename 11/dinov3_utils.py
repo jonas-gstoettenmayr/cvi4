@@ -150,13 +150,13 @@ def extract_features(
     all_cls, all_patch = [], []
     for i in range(0, len(flat_paths), batch_size):
         batch  = [Image.open(p).convert("RGB") for p in flat_paths[i : i + batch_size]]
-        inputs = #TODO
-        inputs = #TODO
-        out    = #TODO
+        inputs = None #TODO
+        inputs = None #TODO
+        out    = None #TODO
 
         all_cls.append(out.pooler_output.cpu().float().numpy())
 
-        patches = #TODO
+        patches = None #TODO
         assert patches.shape[1] == N_PATCH, (
             f"Expected {N_PATCH} patches, got {patches.shape[1]}"
         )
@@ -392,11 +392,11 @@ def top_pairs(
     highest          : ``True`` → highest similarities; ``False`` → lowest
     exclude_diagonal : if ``True`` skip entries where ``row == col``
     """
-    flat  = sim_block.flatten()
-    order = np.argsort(flat)[::-1] if highest else np.argsort(flat)
+    flat  = None # TODO
+    order = None # TODO
     pairs = []
     for idx in order:
-        r, c = divmod(int(idx), sim_block.shape[1])
+        r, c = None, None # TODO
         if exclude_diagonal and r == c:
             continue
         pairs.append((r, c, float(sim_block[r, c])))
