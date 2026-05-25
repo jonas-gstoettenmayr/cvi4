@@ -150,13 +150,13 @@ def extract_features(
     all_cls, all_patch = [], []
     for i in range(0, len(flat_paths), batch_size):
         batch  = [Image.open(p).convert("RGB") for p in flat_paths[i : i + batch_size]]
-        inputs = processor(images=batch, return_tensors="pt")
-        inputs = {k: v.to(device) for k, v in inputs.items()}
-        out    = model(**inputs)
+        inputs = #TODO
+        inputs = #TODO
+        out    = #TODO
 
         all_cls.append(out.pooler_output.cpu().float().numpy())
 
-        patches = out.last_hidden_state[:, 1 + num_reg :, :].cpu().float().numpy()
+        patches = #TODO
         assert patches.shape[1] == N_PATCH, (
             f"Expected {N_PATCH} patches, got {patches.shape[1]}"
         )
@@ -630,8 +630,4 @@ def centroid_predictions(
     -------
     ``list[str]`` of predicted class names
     """
-    X     = transform(net, emb)
-    names = list(centroids_dict.keys())
-    cmat  = np.stack([centroids_dict[c] for c in names])
-    cmat /= np.linalg.norm(cmat, axis=1, keepdims=True) + 1e-8
-    return [names[i] for i in (X @ cmat.T).argmax(axis=1)]
+    return # TODO
