@@ -9,9 +9,6 @@
 #
 # For CPU-only environments replace the +cu121 suffixes with the plain PyPI
 # package names (torch, torchvision) and remove the --extra-index-url line.
-#
-# Note: CLIP is not on PyPI — install from source after this file:
-#   pip install git+https://github.com/openai/CLIP.git
 
 --extra-index-url https://download.pytorch.org/whl/cu121
 
@@ -36,3 +33,4 @@ seaborn
 # ML utilities
 scikit-learn
 tqdm
+git+https://github.com/openai/CLIP.git
