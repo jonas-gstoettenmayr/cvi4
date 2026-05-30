@@ -1,25 +1,21 @@
-`> open folder` 
+# Clone Repository
+`git clone --recursive https://github.com/schedldave/cvi4ic-notebooks.git`
 
-/home/azureuser
-
-`> Create new terminal`
-
-`git clone https://github.com/schedldave/cvi4ic-notebooks.git`
-`git submodule update --init --recursive`
-
+# Install UV if necessary (optional)
 `curl -LsSf https://astral.sh/uv/install.sh | sh`
-`uv venv`
-`source .venv/bin/activate`
-`uv pip install git+https://github.com/openai/CLIP.git`
-`uv pip install -r requirements.txt`
 
-Open notebook and select kernel
-`>Python: Select Interpreter`
-`Enter interpreter path`
-`Find...`
-`/home/azureuser/cvi4ic-notebooks/11/.venv/bin/python`
-
-
+# Activate workspace and register jupyter kernel 
 ```
-pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
+cd 11
+uv sync
+source .venv/bin/activate
+python -m ipykernel install --user --name CV1112 --display-name "Python (CV1112)"
+``` 
+
+# Select kernel in notebook
+```
+Kernel
+Select Another Kernel
+Azure ML compute Instance
+Python (CV1112)
 ```
