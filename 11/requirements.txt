@@ -12,7 +12,7 @@
 
 --extra-index-url https://download.pytorch.org/whl/cu121
 
-# Deep learning — pinned to the cu121 build; matches NVIDIA driver 12020 (CUDA 12.2)
+# Deep learning — pinned to the cu121 build; matches NVIDIA driver (CUDA 12.1)
 torch==2.5.1+cu121
 torchvision==0.20.1+cu121
 
@@ -34,6 +34,9 @@ seaborn
 scikit-learn
 tqdm
 git+https://github.com/openai/CLIP.git
+# timm  # required by radio
+# einops # required by radio
+# open-clip-torch # required by radio
 
 # Jupyter
 jupyterlab
