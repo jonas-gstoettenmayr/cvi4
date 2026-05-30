@@ -5,7 +5,7 @@
 # The --extra-index-url line below adds the PyTorch cu121 wheel index alongside
 # PyPI so that only torch/torchvision are pulled from there; all other packages
 # still resolve from PyPI and existing environment pins are not disturbed.
-# Compatible with NVIDIA driver 12020 (CUDA 12.2) on T4 nodes.
+# Compatible with NVIDIA driver (CUDA 12.1) on T4 nodes.
 #
 # For CPU-only environments replace the +cu121 suffixes with the plain PyPI
 # package names (torch, torchvision) and remove the --extra-index-url line.
@@ -17,27 +17,27 @@ torch==2.5.1+cu121
 torchvision==0.20.1+cu121
 
 # Vision & data
-Pillow
-numpy
+Pillow==9.0.1
+numpy==2.2.6
 
 # HuggingFace
-transformers
-ipywidgets
-huggingface-hub
-sentencepiece          # required by TIPSv2 text encoder and other HF tokenizers
+transformers==5.9.0
+ipywidgets==8.1.8
+huggingface-hub==1.17.0
+sentencepiece==0.2.1          # required by TIPSv2 text encoder and other HF tokenizers
 
 # Visualisation
-matplotlib
-seaborn
+matplotlib==3.5.1
+seaborn==0.13.2
 
 # ML utilities
-scikit-learn
-tqdm
+scikit-learn==1.7.2
+tqdm==4.67.3
 git+https://github.com/openai/CLIP.git
 # timm  # required by radio
 # einops # required by radio
 # open-clip-torch # required by radio
 
 # Jupyter
-jupyterlab
-ipykernel
+jupyterlab==4.5.7
+ipykernel==7.2.0
