@@ -13,6 +13,9 @@ venv/
 data/
 *.csv
 *.h5
+bambi_downloads/
+Dataset/
+exported_frames/
 
 # OS
 .DS_Store
